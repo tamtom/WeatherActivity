@@ -1,5 +1,6 @@
 package data;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -7,6 +8,11 @@ import org.json.JSONObject;
  */
 public class Item implements JSONPopulator {
     private Condition condition;
+    private Forcast forcast;
+
+    public Forcast getForcast() {
+        return forcast;
+    }
 
     public Condition getCondition() {
         return condition;
@@ -16,6 +22,13 @@ public class Item implements JSONPopulator {
     public void populate(JSONObject data) {
         condition = new Condition();
         condition.populate(data.optJSONObject("condition"));
+        forcast = new Forcast();
+        forcast.populatear(data.optJSONArray("forecast"));
+
+    }
+
+    @Override
+    public void populatear(JSONArray data) {
 
     }
 }

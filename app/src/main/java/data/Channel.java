@@ -1,5 +1,6 @@
 package data;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 public class Channel implements JSONPopulator {
     Item item;
     Unit unit;
+    Forcast forcast;
 
     public Item getItem() {
         return item;
@@ -23,6 +25,12 @@ public class Channel implements JSONPopulator {
         unit.populate(data.optJSONObject("units"));
         item = new Item();
         item.populate(data.optJSONObject("item"));
+
+
+    }
+
+    @Override
+    public void populatear(JSONArray data) {
 
     }
 }

@@ -1,5 +1,6 @@
 package data;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -28,5 +29,10 @@ public class Condition implements JSONPopulator {
      code = data.optInt("code");
         temp = data.optInt("temp");
         description = data.optString("text");
+    }
+
+    @Override
+    public void populatear(JSONArray data) {
+
     }
 }

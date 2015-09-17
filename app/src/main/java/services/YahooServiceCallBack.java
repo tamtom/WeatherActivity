@@ -8,4 +8,5 @@ import data.Channel;
 public interface YahooServiceCallBack {
     void servicesucsess (Channel channel);
     void servicefail(Exception ex);
+
 }

@@ -1,5 +1,6 @@
 package data;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -15,5 +16,10 @@ public class Unit implements JSONPopulator {
     @Override
     public void populate(JSONObject data) {
 temperature = data.optString("temperature");
+    }
+
+    @Override
+    public void populatear(JSONArray data) {
+
     }
 }

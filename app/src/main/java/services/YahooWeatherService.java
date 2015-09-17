@@ -2,6 +2,7 @@ package services;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,12 +22,12 @@ public class YahooWeatherService {
     private String Location;
     private Exception error;
 
-    public String getLocation() {
-        return Location;
-    }
-
     public YahooWeatherService(YahooServiceCallBack callback) {
         this.callback = callback;
+    }
+
+    public String getLocation() {
+        return Location;
     }
 
     public void refreshWeather(String l) {
@@ -80,6 +81,7 @@ public class YahooWeatherService {
                     channel.populate(queryResults.optJSONObject("results").optJSONObject("channel"));
 
                     callback.servicesucsess(channel);
+
 
                 } catch (JSONException e) {
                     callback.servicefail(e);

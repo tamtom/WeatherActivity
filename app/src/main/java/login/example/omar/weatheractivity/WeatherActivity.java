@@ -1,20 +1,29 @@
 package login.example.omar.weatheractivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import data.Channel;
+import data.Forcast;
 import data.Item;
 import services.YahooServiceCallBack;
 import services.YahooWeatherService;
 
-public class WeatherActivity extends Activity implements YahooServiceCallBack {
+public class WeatherActivity extends AppCompatActivity implements YahooServiceCallBack {
 private ImageView img ;
     private TextView temp ;
     private TextView loctaion;
@@ -26,6 +35,37 @@ private ImageView img ;
     private TextView h;
     private TextView l;
     private TextView d;
+    private Button change;
+    private Spinner li;
+    Dialog dialogs ;
+    public void showDialog(){
+        dialogs = new Dialog(this);
+
+        dialogs.setContentView(R.layout.select);
+        change = (Button) dialogs.findViewById(R.id.change);
+        li = (Spinner) dialogs.findViewById(R.id.uni);
+        dialogs.setCancelable(false);
+        dialogs.show();
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogs.hide();
+                String c = li.getSelectedItem().toString();
+                Forcast.index =0;
+                service = new YahooWeatherService(WeatherActivity.this);
+                dialog = new ProgressDialog(WeatherActivity.this);
+                dialog.setMessage("Loading...");
+                dialog.show();
+                 if(c.contains("المركز"))
+                service.refreshWeather("Al Balqa, Jordan");
+                else  if (c.contains("العقبة"))
+                     service.refreshWeather("Al Aqaba, Jordan");
+                else if(c.contains("الهندسية"))
+                     service.refreshWeather("Amman, Jordan");
+            }
+        });
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,5 +152,21 @@ dialog.hide();
     public void servicefail(Exception ex) {
         Toast.makeText(this,ex.getMessage(),Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_weather,menu);
+        return  true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.change_city){
+
+ showDialog();
+        }
+        return  super.onOptionsItemSelected(item);
     }
 }

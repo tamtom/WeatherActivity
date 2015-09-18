@@ -2,5 +2,11 @@
     <string name="app_name">WeatherActivity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="change_city">اختر الجامعة</string>
+    <string-array name="ar">
+        <item>البلقاء المركز</item>
+        <item>العقبة</item>
+        <item>الهندسية</item>
+
+    </string-array>
 </resources>
